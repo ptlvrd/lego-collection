@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lego Collection</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+
+</head>
+<body>
+    <nav class="bg-purple-900">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+                <div class="hidden sm:block sm:ml-6">
+                    <div class="flex space-x-4">
+                        <!-- Home Link -->
+                        <a href="/views/home.html" class="bg-purple-900 text-yellow-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                        <a href="/views/about.html" class="bg-purple-900 text-yellow-300 hover:bg-purple-300 hover:text-yellow-900 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">About</a>
+                        <!-- Dropdown for Themes -->
+                        <div class="relative">
+                            <button type="button" class="bg-purple-900 text-yellow-300 hover:bg-purple-300 hover:text-yellow-900 rounded-md px-3 py-2 text-sm font-medium focus:outline-none">
+                                Themes
+                            </button>
+                            <div class="absolute z-10 hidden bg-purple-900 text-yellow-300 py-1 mt-2 rounded-md shadow-lg">
+                                <!-- Replace these with dynamic links -->
+                                <a href="/lego/sets?theme=Classic Town" class="block px-4 py-2 text-sm">Classic Town</a>
+                                <a href="/lego/sets?theme=Icons" class="block px-4 py-2 text-sm">Icons</a>
+                                <a href="/lego/sets?theme=Books" class="block px-4 py-2 text-sm">Books</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4">
+        <div class="hero min-h-screen bg-base-200">
+            <div class="hero-content text-center">
+              <div class="max-w-md">
+                <h1 class="text-5xl font-bold">About Me</h1>
+                <p class="py-6">All the details you need about me - the creative mind blending design with development.</p>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2  gap-6">
+            <div>
+                <img class="max-w-sm rounded-lg shadow-2xl" src="https://www.senecacollege.ca/content/dam/projects/seneca/campus-photos/king-campus.jpg" alt="picture">
+
+            </div>
+            <div class="prose">
+                <p>As a student at Seneca Polytechnic, I, Vrunda Patel, am deeply engrossed in the world of Computer Programming and Analysis. Currently, my academic journey involves courses such as DBS (Database Management), WEB322 (Web Development), OOP (Object-Oriented Programming using C++), and SYD (Software Design and Analysis). Beyond the classroom, I immerse myself in the intricacies of coding challenges, software architecture exploration, and staying abreast of emerging tech trends. With an insatiable curiosity for innovation, I aspire to make meaningful contributions to the ever-evolving tech landscape while nurturing my passion for problem-solving and software development.</p>
+
+            </div>
+
+          
+        </div>
+    </div>
+</body>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lego Collection</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+</head>
+<body>
+    <nav class="bg-purple-900">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+            
+                <!-- Menu links -->
+                <div class="hidden sm:block sm:ml-6">
+                    <div class="flex space-x-4">
+                        <!-- Home Link -->
+                        <a href="/views/home.html" class="bg-purple-900 text-yellow-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+                        <!-- About Link -->
+                        <a href="/views/about.html" class="bg-purple-900 text-yellow-300 hover:bg-purple-300 hover:text-yellow-900 rounded-md px-3 py-2 text-sm font-medium">About</a>
+    
+                        <!-- Dropdown for Themes -->
+                        <div class="relative">
+                            <button type="button" class="bg-purple-900 text-yellow-300 hover:bg-purple-300 hover:text-yellow-900 rounded-md px-3 py-2 text-sm font-medium focus:outline-none">
+                                Themes
+                            </button>
+                            <div class="absolute z-10 hidden bg-purple-900 text-yellow-300 py-1 mt-2 rounded-md shadow-lg">
+                                <!-- Replace these with dynamic links -->
+                                <a href="/lego/sets?theme=Classic Town" class="block px-4 py-2 text-sm">Classic Town</a>
+                                <a href="/lego/sets?theme=Icons" class="block px-4 py-2 text-sm">Icons</a>
+                                <a href="/lego/sets?theme=Books" class="block px-4 py-2 text-sm">Books</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto">
+        <!-- 404 Message or Image -->
+        <div class="hero bg-gray-200 p-8">
+            <h1 class="text-4xl font-bold text-gray-900">404 - Page Not Found</h1>
+            <p class="text-xl text-gray-700">Sorry, the page you are looking for could not be found.</p>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "daisyui": "^4.7.2",
+    "express": "^4.18.2",
+    "node.js": "^0.0.1-security"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "tw:build": "tailwindcss build -i ./public/css/tailwind.css -o ./public/css/main.css"
+  },
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "A simple express.js web server providing access to LEGO sets data including set numbers, names, years, themes, and image URLs.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "WEB322"
+  },
+  "keywords": [
+    "-"
+  ],
+  "author": "Patel Vrunda",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
