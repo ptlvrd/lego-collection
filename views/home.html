@@ -1,113 +1,100 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Lego Collection</title>
-    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
 </head>
 
 <body>
-    <nav class="bg-purple-900">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="/" class="flex items-center text-yellow-300 text-xl font-bold">
-                        <img src="https://images.unsplash.com/photo-1505322033502-1f4385692e6a?q=80&w=3168&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lego Logo" class="h-8 w-auto mr-2">
-                        Lego Collection
-                    </a>
-                </div>
+    <div class="navbar bg-base-100">
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl" href="/">Lego Collection</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/about">About</a></li>
+                <li>
+                    <details>
+                        <summary>Theme</summary>
+                        <ul class="p-2 bg-base-100 rounded-t-none">
+                            <li><a href="/lego/sets?theme=Classic Town">Classic Town</a></li>
+                            <li><a href="/lego/sets?theme=Icons">Icons</a></li>
+                            <li><a href="/lego/sets?theme=Books">Books</a></li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-                <!-- Menu links -->
-                <div class="hidden sm:block sm:ml-6">
-                    <div class="flex space-x-4">
-                        <!-- Home Link -->
-                        <a href="/views/home.html" class="bg-purple-900 text-yellow-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-                        <!-- About Link -->
-                        <a href="/views/about.html" class="bg-purple-900 text-yellow-300 hover:bg-purple-300 hover:text-yellow-900 rounded-md px-3 py-2 text-sm font-medium">About</a>
+    <!-- Hero section -->
+    <div class="hero min-h-screen" style="background-image: url('your-background-image-url');">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+            <div class="max-w-md">
+                <h1 class="mb-5 text-5xl font-bold">Welcome to our Lego Collection!</h1>
+                <p class="mb-5">Explore our amazing collection of Lego sets. From classic to modern, we've got something for everyone!</p>
+                <a href="/lego/sets" class="btn btn-primary">Explore Lego Sets</a>
+            </div>
+        </div>
+    </div>
 
-                        <!-- Dropdown for Themes -->
-                        <div class="relative dropdown">
-                            <button id="themesDropdown" type="button" class="bg-purple-900 text-yellow-300 hover:bg-purple-300 hover:text-yellow-900 rounded-md px-3 py-2 text-sm font-medium focus:outline-none">
-                                Theme
-                            </button>
-                            <div id="themesMenu" class="absolute z-10 hidden bg-purple-900 text-yellow-300 mt-2 rounded-md shadow-lg">
-                                <a href="/lego/sets?theme=Classic Town" class="block px-4 py-2 text-sm">Classic Town</a>
-                                <a href="/lego/sets?theme=Icons" class="block px-4 py-2 text-sm">Icons</a>
-                                <a href="/lego/sets?theme=Books" class="block px-4 py-2 text-sm">Books</a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="card bg-base-100 shadow-xl">
+            <figure>
+                <img class="w-full" src="https://cdn.rebrickable.com/media/sets/002253963-1.jpg" alt="Lego set">
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">Legend of Chima: Corbeaux et Gorilles</h2>
+                <p>Title translates as: Ravens and Gorillas French: Corbeaux et Gorilles Polish: Kruki i Goryle</p>
+                <div class="card-actions justify-end">
+                    <a href="/lego/sets/002253963-1" class="btn btn-primary">View Details</a>
                 </div>
             </div>
         </div>
-    </nav>
-    <div class="container mx-auto">
-        <div class="hero min-h-screen" style="background-image: url(https://images.unsplash.com/photo-1557774394-de53f40ccb02?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
-            <div class="hero-overlay bg-opacity-60"></div>
-            <div class="hero-content text-center text-neutral-content">
-                <div class="max-w-md">
-                    <h1 class="mb-5 text-5xl text-purple-400 font-bold">Welcome to our Lego Collection!</h1>
-                    <p class="mb-5 text-yellow-500">Explore our amazing collection of Lego sets. From classic to modern, we've got something for everyone!</p>
-                    <a href="/lego/sets" class="btn bg-purple-900 text-yellow-300 hover:bg-purple-300 hover:text-yellow-900 py-2 px-4 rounded-md inline-block text-center">
-                        Explore Lego Sets
-                    </a>
+        <div class="card bg-base-100 shadow-xl">
+            <figure>
+                <img class="w-full" src="https://cdn.rebrickable.com/media/sets/010423-1.jpg" alt="Lego set">
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">The Majestic Horse</h2>
+                <p>Designed by previous 2017 Lego Masters UK winners Nathan Dias and Steve Guinness. Given to select members of the Recognised Lego Fan Media group for an April fools prank in 2023, only around 10 are known to exist. Although pictures show box art for this set, it was received in a clear plastic bag in a standard box. Building instructions were locked with a password and unprintable so will likely never be available to the public.</p>
+                <div class="card-actions justify-end">
+                    <a href="/lego/sets/010423-1" class="btn btn-primary">View Details</a>
                 </div>
             </div>
-
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="card bg-base-100 shadow-xl">
-                <figure>
-                    <img class="w-full" src="https://cdn.rebrickable.com/media/sets/002253963-1.jpg" alt="Lego set">
-                </figure>
-                <div class="card-body">
-                    <h2 class="card-title">Legend of Chima: Corbeaux et Gorilles</h2>
-                    <p>Title translates as: Ravens and Gorillas French: Corbeaux et Gorilles Polish: Kruki i Goryle</p>
-                    <div class="card-actions justify-end">
-                        <a href="/lego/sets/002253963-1" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card bg-base-100 shadow-xl">
-                <figure>
-                    <img class="w-full" src="https://cdn.rebrickable.com/media/sets/010423-1.jpg" alt="Lego set">
-                </figure>
-                <div class="card-body">
-                    <h2 class="card-title">The Majestic Horse</h2>
-                    <p>Designed by previous 2017 Lego Masters UK winners Nathan Dias and Steve Guinness. Given to select members of the Recognised Lego Fan Media group for an April fools prank in 2023, only around 10 are known to exist. Although pictures show box art for this set, it was received in a clear plastic bag in a standard box. Building instructions were locked with a password and unprintable so will likely never be available to the public.</p>
-                    <div class="card-actions justify-end">
-                        <a href="/lego/sets/010423-1" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card bg-base-100 shadow-xl">
-                <figure>
-                    <img class="w-full" src="https://cdn.rebrickable.com/media/sets/0241357594-1.jpg" alt="Lego set">
-                </figure>
-                <div class="card-body">
-                    <h2 class="card-title">Star Wars: Build Your Own Adventure: Galactic Missions</h2>
-                    <p>Published by DK Children (Dorling Kindersley) as a hardcover released on August 1, 2019 in the United Kingdom and on August 6, 2019 in the United States.</p>
-                    <div class="card-actions justify-end">
-                        <a href="/lego/sets/0241357594-1" class="btn btn-primary">View Details</a>
-                    </div>
+        <div class="card bg-base-100 shadow-xl">
+            <figure>
+                <img class="w-full" src="https://cdn.rebrickable.com/media/sets/0241357594-1.jpg" alt="Lego set">
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">Star Wars: Build Your Own Adventure: Galactic Missions</h2>
+                <p>Published by DK Children (Dorling Kindersley) as a hardcover released on August 1, 2019 in the United Kingdom and on August 6, 2019 in the United States.</p>
+                <div class="card-actions justify-end">
+                    <a href="/lego/sets/0241357594-1" class="btn btn-primary">View Details</a>
                 </div>
             </div>
         </div>
     </div>
 
-</body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const themesDropdown = document.getElementById('themesDropdown');
-        const themesMenu = document.getElementById('themesMenu');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themesDropdown = document.getElementById('themesDropdown');
+            const themesMenu = document.getElementById('themesMenu');
 
-        themesDropdown.addEventListener('click', function() {
-            themesMenu.classList.toggle('hidden');
+            themesDropdown.addEventListener('click', function() {
+                themesMenu.classList.toggle('hidden');
+            });
         });
-    });
-</script>
+    </script>
+
+</body>
 
 </html>

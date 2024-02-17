@@ -1,6 +1,6 @@
 /********************************************************************************
 
-* WEB322 – Assignment 02
+* WEB322 – Assignment 03
 
 *
 
@@ -10,26 +10,29 @@
 
 *
 
+
 * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
 
 *
 
-* Name: Patel vrundaben vijaykumar Student ID: 158605220_ Date: 01/02/2024
+* Name: Patel vrundaben vijaykumar Student ID: 158605220_ Date: 17/02/2024
 
 *
 
 ********************************************************************************/
 const legoData = require("./modules/legoSets");
 const express = require('express');
-const app = express();
-app.use(express.static('public'));
-const HTTP_PORT = process.env.PORT || 8080;
 const path = require('path');
+const app = express();
+
+const HTTP_PORT = process.env.PORT || 3000;
 
 legoData.initialize()
   .then(()=> {
     app.listen(HTTP_PORT, () => console.log(`server listening on: ${HTTP_PORT}`));
   })
+app.use(express.static(path.join(__dirname, 'public')));
+
   
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'home.html'));
