@@ -9,26 +9,8 @@
     <title>About</title>
 </head>
 <body>
-  <div class="navbar bg-base-100">
-      <div class="flex-1">
-        <a class="btn btn-ghost text-xl" href="/">Lego Collection</a>
-      </div>
-      <div class="flex-none">
-        <ul class="menu menu-horizontal px-1">
-          <li><a href="/about">About</a></li>
-          <li>
-              <details>
-                  <summary>Theme</summary>
-                  <ul class="p-2 bg-base-100 rounded-t-none">
-                      <li><a href="/lego/sets?theme=Classic Town">Classic Town</a></li>
-                      <li><a href="/lego/sets?theme=Icons">Icons</a></li>
-                      <li><a href="/lego/sets?theme=Books">Books</a></li>
-                  </ul>
-              </details>
-          </li>
-        </ul>
-      </div>
-    </div>
+  <%- include('partials/navbar', { page: '/about' }) %>
+
 <body>
   <div class="container mx-auto">
 
