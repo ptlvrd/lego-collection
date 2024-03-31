@@ -9,14 +9,16 @@
 * Name: Patel vrundaben vijaykumar Student ID: 158605220_ Date: 17/03/2024
 *
 * Published URL:https://vivacious-eel-fatigues.cyclic.app/
-
+*
 ********************************************************************************/
 const legoData = require("./modules/legoSets");
 const express = require('express');
-const path = require('path');
 const app = express();
-app.set('view engine', 'ejs');
 const HTTP_PORT = process.env.PORT || 3000;
+
+app.use(express.static("public"));
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
 
 legoData.initialize()
     .then(() => {
@@ -25,8 +27,6 @@ legoData.initialize()
     .catch(error => {
         console.error('Failed to initialize data:', error);
     });
-
-app.use(express.static("public"));
 
 app.get('/', (req, res) => {
     res.render("home");
@@ -70,7 +70,61 @@ app.get("/lego/sets/:setId", (req, res) => {
         });
 });
 
+app.get('/lego/addSet', (req, res) => {
+    legoData.getAllThemes()
+        .then(themes => {
+            res.render("addSet", { themes: themes });
+        })
+        .catch(error => {
+            res.status(500).render("500", { message: `I'm sorry, but we have encountered the following error: ${error}` });
+        });
+});
+
+app.post('/lego/addSet', (req, res) => {
+    const setData = req.body;
+    legoData.addSet(setData)
+        .then(() => {
+            res.redirect('/lego/sets');
+        })
+        .catch(error => {
+            res.status(500).render("500", { message: `I'm sorry, but we have encountered the following error: ${error}` });
+        });
+});
+
+
+app.get('/lego/editSet/:num', (req, res) => {
+    const setNum = req.params.num;
+    Promise.all([legoData.getSetByNum(setNum), legoData.getAllThemes()])
+        .then(([set, themes]) => {
+            res.render("editSet", { themes: themes, set: set });
+        })
+        .catch(error => {
+            res.status(404).render("404", { message: error });
+        });
+});
+
+app.post('/lego/editSet', (req, res) => {
+    const { set_num, ...setData } = req.body;
+    legoData.editSet(set_num, setData)
+        .then(() => {
+            res.redirect('/lego/sets');
+        })
+        .catch(error => {
+            res.status(500).render("500", { message: `I'm sorry, but we have encountered the following error: ${error}` });
+        });
+});
+
+app.get('/lego/deleteSet/:num', (req, res) => {
+    const setNum = req.params.num;
+    legoData.deleteSet(setNum)
+        .then(() => {
+            res.redirect('/lego/sets');
+        })
+        .catch(error => {
+            res.status(500).render("500", { message: `I'm sorry, but we have encountered the following error: ${error}` });
+        });
+});
+
 app.use((req, res) => {
     res.status(404).render("404", { message: "The page you are looking for does not exist." });
 });
-

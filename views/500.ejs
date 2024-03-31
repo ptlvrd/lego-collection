@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>500 - Internal Server Error</title>
+</head>
+<body class="bg-gray-100">
+    <%- include('partials/navbar', { page: '' }) %>
+
+    <div class="container mx-auto px-4 py-20 text-center">
+        <h1 class="text-6xl font-bold">500</h1>
+        <p class="text-xl mt-5 mb-10">Internal Server Error</p>
+        <a href="/" class="btn btn-primary">Go Home</a>
+    </div>
+</body>
+</html>
