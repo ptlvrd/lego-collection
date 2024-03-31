@@ -20,14 +20,12 @@
 
 ********************************************************************************/
 require('dotenv').config();
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 const setData = require("../data/setData");
 const themeData = require("../data/themeData");
 
-
-// set up sequelize to point to our postgres database
-const sequelize = new Sequelize('senecaDB', 'senecaDB_owner', 'mq9WtsN0lYxa', {
+let sequelize = new Sequelize('senecaDB', 'senecaDB_owner', 'mq9WtsN0lYxa', {
   host: 'ep-round-math-a5tb1hbd-pooler.us-east-2.aws.neon.tech',
   dialect: 'postgres',
   port: 5432,
@@ -36,13 +34,12 @@ const sequelize = new Sequelize('senecaDB', 'senecaDB_owner', 'mq9WtsN0lYxa', {
   },
 });
 
-sequelize
-  .authenticate()
+sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
   })
   .catch((err) => {
-    console.log('Unable to connect to the database:', err);
+    console.error('Unable to connect to the database:', err);
   });
 
 const Theme = sequelize.define('Theme', {
@@ -56,8 +53,7 @@ const Theme = sequelize.define('Theme', {
 {
   createdAt: false,
   updatedAt: false,
-}
-);
+});
 
 const Set = sequelize.define('Set', {
   set_num: {
@@ -69,7 +65,7 @@ const Set = sequelize.define('Set', {
   num_parts: Sequelize.INTEGER,
   theme_id: Sequelize.INTEGER,
   img_url: Sequelize.STRING,
-  },
+},
 {
   createdAt: false,
   updatedAt: false,
@@ -87,7 +83,7 @@ function initialize() {
     }
   });
 }
-  
+
 function getAllSets(){
   return new Promise(async (resolve, reject)=>{
     let sets = await Set.findAll({include: [Theme]})
@@ -105,32 +101,27 @@ function getAllThemes() {
     }
   });
 }
-  
+
 function getSetByNum(setNum){
   return new Promise(async (resolve, reject)=>{
-let findNum = await Set.findAll({include: [Theme],  where: { set_num: setNum }})
-if(findNum.length > 0){
-  resolve(findNum[0]);
-}
-else
-{
-  reject("Unable to find requested sets");
-}
+    let findNum = await Set.findAll({include: [Theme],  where: { set_num: setNum }})
+    if(findNum.length > 0){
+      resolve(findNum[0]);
+    } else {
+      reject("Unable to find requested sets");
+    }
   });
 }
 
 function getSetsByTheme(theme){
   return new Promise(async (resolve, reject)=>{
-    let foundSets = await Set.findAll({include: [Theme], where: {'$Theme.name$': {[Sequelize.Op.iLike]: `%${theme}%`} 
-  }});
+    let foundSets = await Set.findAll({include: [Theme], where: {'$Theme.name$': {[Sequelize.Op.iLike]: `%${theme}%`}}});
 
-  if(foundSets.length > 0){
-    resolve(foundSets);
-  }
-  else
-  {
-    reject("Unable to find requested sets");
-  }
+    if(foundSets.length > 0){
+      resolve(foundSets);
+    } else {
+      reject("Unable to find requested sets");
+    }
   });
 }
 
@@ -148,10 +139,10 @@ function addSet(setData) {
 function editSet(set_num, setData) {
   return new Promise(async (resolve, reject) => {
     try{
-      await Set.update(setData, {where: {set_num: set_num}})
+      await Set.update(setData, {where: {set_num: set_num}});
       resolve();
-    }catch(err){
-reject(err.errors[0].message);
+    } catch(err){
+      reject(err.errors[0].message);
     }
   });
 }
@@ -159,14 +150,12 @@ reject(err.errors[0].message);
 function deleteSet(set_num){
   return new Promise(async (resolve, reject)=>{
     try{
-await Set.destroy({where: {set_num : set_num}});
-resolve();
-    }catch(err){
-        reject(err.errors[0].message);
+      await Set.destroy({where: {set_num : set_num}});
+      resolve();
+    } catch(err){
+      reject(err.errors[0].message);
     }
-
   });
 }
 
-
-  module.exports = { initialize, getAllSets, getAllThemes, getSetByNum, getSetsByTheme, addSet, editSet, deleteSet }
+module.exports = { initialize, getAllSets, getAllThemes, getSetByNum, getSetsByTheme, addSet, editSet, deleteSet };
