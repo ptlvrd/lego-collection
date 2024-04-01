@@ -20,7 +20,7 @@
 
 ********************************************************************************/
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
+const Sequelize = require('sequelize');
 
 let sequelize = new Sequelize('senecaDB', 'senecaDB_owner', 'mq9WtsN0lYxa', {
   host: 'ep-round-math-a5tb1hbd-pooler.us-east-2.aws.neon.tech',
@@ -28,7 +28,7 @@ let sequelize = new Sequelize('senecaDB', 'senecaDB_owner', 'mq9WtsN0lYxa', {
   port: 5432,
   dialectOptions: {
     ssl: { rejectUnauthorized: false },
-  },
+  }
 });
 
 sequelize.authenticate()
@@ -69,7 +69,7 @@ const Set = sequelize.define('Set', {
   updatedAt: false,
 });
 
-Set.belongsTo(Theme, {foreignKey: 'theme_id'});
+Set.belongsTo(Theme, {foreignKey: 'theme_id'})
 
 function initialize(){
   return new Promise(async (resolve, reject)=> {
@@ -101,15 +101,12 @@ function getAllThemes(){
 function getSetByNum(setNum) {
   return new Promise(async (resolve, reject) => {
     let foundSet = await Set.findAll({include: [Theme], where: { set_num: setNum}});
- 
     if (foundSet.length > 0) {
       resolve(foundSet[0]);
     } else {
       reject("Unable to find requested set");
     }
-
   });
-
 }
 
 function getSetsByTheme(theme){
