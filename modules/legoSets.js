@@ -20,11 +20,7 @@
 
 ********************************************************************************/
 require('dotenv').config();
-
 const { Sequelize } = require('sequelize');
-
-const setData = require("../data/setData"); 
-const themeData = require("../data/themeData");
 
 let sequelize = new Sequelize('senecaDB', 'senecaDB_owner', 'mq9WtsN0lYxa', {
   host: 'ep-round-math-a5tb1hbd-pooler.us-east-2.aws.neon.tech',
@@ -57,7 +53,6 @@ const Theme = sequelize.define('Theme', {
 }
 );
 
-// Set 모델 정의
 const Set = sequelize.define('Set', {
   set_num: {
     type: Sequelize.STRING,
@@ -70,14 +65,11 @@ const Set = sequelize.define('Set', {
   img_url: Sequelize.STRING,
   },
 {
-  // createdAt 및 updatedAt 속성 비활성화
   createdAt: false,
   updatedAt: false,
 });
 
 Set.belongsTo(Theme, {foreignKey: 'theme_id'});
-
-
 
 function initialize(){
   return new Promise(async (resolve, reject)=> {
@@ -90,8 +82,6 @@ function initialize(){
   }
 });
 }
-
-
 
 function getAllSets(){
   return new Promise(async (resolve, reject)=>{
@@ -108,19 +98,19 @@ function getAllThemes(){
 }
 
 
-function getSetByNum(setNum){
-  return new Promise(async (resolve, reject)=>{
-let findNum = await Set.findAll({include: [Theme],  where: { set_num: setNum }})
-if(findNum.length > 0){
-  resolve(findNum[0]);
-}
-else
-{
-  reject("Unable to find requested sets");
-}
-  });
-}
+function getSetByNum(setNum) {
+  return new Promise(async (resolve, reject) => {
+    let foundSet = await Set.findAll({include: [Theme], where: { set_num: setNum}});
+ 
+    if (foundSet.length > 0) {
+      resolve(foundSet[0]);
+    } else {
+      reject("Unable to find requested set");
+    }
 
+  });
+
+}
 
 function getSetsByTheme(theme){
   return new Promise(async (resolve, reject)=>{
@@ -138,36 +128,38 @@ function getSetsByTheme(theme){
 }
 
 function addSet(setData){
-  return new Promise(async (resolve, reject)=>{
-try{
-  await Set.create(setData);
-  resolve();
-}catch(err){
-reject(err.errors[0].message)
-}
-  });
-}
-
-function editSet(set_num, setData) {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve,reject)=>{
     try{
-      await Set.update(setData, {where: {set_num: set_num}})
+      await Set.create(setData);
       resolve();
     }catch(err){
-reject(err.errors[0].message);
+      reject(err.errors[0].message)
     }
   });
 }
 
-function deleteSet(set_num){
-  return new Promise(async (resolve, reject)=>{
-    try{
-await Set.destroy({where: {set_num : set_num}});
-resolve();
+function editSet(set_num, setData){
+  return new Promise(async (resolve,reject)=>{
+    try {
+      await Set.update(setData,{where: {set_num: set_num}})
+      resolve();
     }catch(err){
-        reject(err.errors[0].message);
+      reject(err.errors[0].message);
     }
+  });
+}
 
+
+function deleteSet(set_num){
+  return new Promise(async (resolve,reject)=>{
+    try{
+      await Set.destroy({
+        where: { set_num: set_num }
+      });
+      resolve();
+    }catch(err){
+      reject(err.errors[0].message);
+    }
   });
 }
 

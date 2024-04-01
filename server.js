@@ -36,85 +36,72 @@ app.get('/about', (req, res) => {
     res.render("about");
 });
 
-app.get("/lego/sets", (req, res) => {
-    const theme = req.query.theme;
-    if (theme) {
-        legoData.getSetsByTheme(theme)
-            .then(sets => {
-                if (sets.length > 0) {
-                    res.render("sets", { sets: sets });
-                } else {
-                    res.status(404).render("404", { message: "No sets found for the specified theme." });
-                }
-            })
-            .catch(error => res.status(404).render("404", { message: "Error fetching sets by theme." }));
-    } else {
-        legoData.getAllSets()
-            .then(sets => res.render("sets", { sets: sets }))
-            .catch(error => res.status(404).render("404", { message: "Error retrieving Lego sets." }));
-    }
+app.get("/lego/addSet", async (req, res) => {
+    let themes = await legoData.getAllThemes()
+    res.render("addSet", { themes: themes })
 });
 
-app.get("/lego/sets/:setId", (req, res) => {
-    const setId = req.params.setId;
-    legoData.getSetByNum(setId)
-        .then(set => {
-            if (set) {
-                res.render("set", { set: set });
-            } else {
-                res.status(404).render("404", { message: `No set found with number ${setId}.` });
-            }
-        })
-        .catch(error => {
-            res.status(404).render("404", { message: `Set with number ${setId} not found.` });
-        });
+app.post("/lego/addSet", async (req, res) => {
+    try {
+      await legoData.addSet(req.body);
+      res.redirect("/lego/sets");
+    } catch (err) {
+      res.render("500", { message: `I'm sorry, but we have encountered the following error: ${err}` });
+    }
+  
 });
 
-app.get("/lego/addSet", async (req,res)=>{
-    try{
-        let themes = await legoData.getAllThemes()
-        res.render("addSet", { themes: themes })
-    }catch(err){
-        res.status(500).render("500", {message: `Error: ${err}`});
+app.get("/lego/editSet/:num", async (req, res) => {
+    try {
+      let set = await legoData.getSetByNum(req.params.num);
+      let themes = await legoData.getAllThemes();
+  
+      res.render("editSet", { set, themes });
+    } catch (err) {
+      res.status(404).render("404", { message: err });
     }
+  
 });
 
-app.post("/lego/addSet", async (req, res)=>{
-    try{
-        await legoData.addSet(req.body);
-        res.redirect("/lego/sets");
+app.post("/lego/editSet", async (req, res) => {
+    try {
+      await legoData.editSet(req.body.set_num, req.body);
+      res.redirect("/lego/sets");
+    } catch (err) {
+      res.render("500", { message: `I'm sorry, but we have encountered the following error: ${err}` });
     }
-    catch(err)
-    {
-        res.status(500).render("500", {message: `Error: ${err}`});
-    }
-});
+  });
 
-app.get("/lego/editSet/:num", async (req,res)=>{
-    try{
-        let set = await legoData.getSetByNum(req.params.num);
-        let themes = await legoData.getAllThemes();
-        res.render("editSet", {set, themes});
-    }catch(err){
-        res.status(404).render("404", {message: err});
+app.get("/lego/deleteSet/:num", async (req, res) => {
+    try {
+      await legoData.deleteSet(req.params.num);
+      res.redirect("/lego/sets");
+    } catch (err) {
+      res.status(500).render("500", { message: `I'm sorry, but we have encountered the following error: ${err}` });
     }
-});
-
-app.post("/lego/editSet", async (req, res)=>{
-    try{
-        await legoData.editSet(req.body.set_num, req.body);
-        res.redirect("/lego/sets");
-    }catch(err){
-        res.status(500).render("500",{message: `Error 500 ${err}`});
+})
+app.get("/lego/sets", async (req, res) => {
+    let sets = [];
+    try {
+      if (req.query.theme) {
+        sets = await legoData.getSetsByTheme(req.query.theme);
+      } else {
+        sets = await legoData.getAllSets();
+      }
+  
+      res.render("sets", { sets })
+    } catch (err) {
+      res.status(404).render("404", { message: err });
     }
-});
+  
+  });
 
-app.get("/lego/deleteSet/:num", async (req, res)=>{
-    try{
-        await legoData.deleteSet(req.params.num);
-        res.redirect("/lego/sets");
-    }catch(err){
-        res.status(500).render("500", {message: `Error ${err}`});
+app.get("/lego/sets/:num", async (req, res) => {
+    try {
+      let set = await legoData.getSetByNum(req.params.num);
+      res.render("set", { set })
+    } catch (err) {
+      res.status(404).render("404", { message: err });
     }
 });
 
