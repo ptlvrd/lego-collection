@@ -1,3 +1,12 @@
+/*********************************************************************************
+ *  WEB322 – Assignment 06** 
+ * I declare that this assignment is my own work in accordance with Seneca's
+ * * Academic Integrity Policy:*
+ * * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html*
+ * * Name: _Patel vrundaben vijyakumar_ Student ID: _158605220__ Date: _21/04/2024_*
+ * * Published URL: https://vivacious-eel-fatigues.cyclic.app
+ *   Github: https://github.com/ptlvrd/lego-collection
+ * *********************************************************************************/
 const legoData = require("./modules/legoSets");
 const express = require('express');
 const app = express();
