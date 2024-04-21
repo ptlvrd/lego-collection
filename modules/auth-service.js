@@ -17,8 +17,7 @@ let User;
 
 const initialize=()=> {
     return new Promise(function (resolve, reject) {
-        let db = mongoose.createConnection(process.env.MONGODB); 
-
+        let db = mongoose.createConnection('mongodb+srv://ptlvrd01:Ptlvrd027@cluster0.qempukh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
         db.on('error', (err) => {
             reject(err); // Reject the promise with the provided error if there's an error connecting to the database
         });
